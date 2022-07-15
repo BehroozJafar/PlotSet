@@ -1,4 +1,0 @@
-function addTitle(svg)
-{
-
-}
