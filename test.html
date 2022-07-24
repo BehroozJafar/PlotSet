@@ -6,6 +6,7 @@
         integrity="sha512-MefNfAGJ/pEy89xLOFs3V6pYPs6AmUhXJrRlydI/9wZuGrqxmrdQ80zKHUcyadAcpH67teDZcBeS6oMJLPtTqw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./script/common.js"></script>
+    <script src="./script/maps.js"></script>
 </head>
 
 <body>
@@ -17,6 +18,14 @@
         .attr("width", 1024)
         .attr("height", 768);
 
+    addLegend(svg, {
+        type: "binned",
+        binningMode: "fixed",
+        numberOfBins: 8,
+        colors: ["#EBC0FF","#FFFFFF", "#7200AB"],
+        minimumValue : 100,
+        maximumValue : 99999
+    });
     addTitle(svg, {
         show: true,
         color: "#FF0000",
