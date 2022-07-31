@@ -70,6 +70,37 @@ var plotset = {
                         .attr("y", yst)
                 }
             }
+        },
+
+        dateFormats: ["%y-%m-%d", "%y/%m/%d", "%Y-%m-%d", "%Y/%m/%d", "%y%m%d", "%y%m%d+%H%M", "%Y%m%d+%H%M", "%Y%m%d", "%Y-%m-%d+%H:%M"
+            , "%b %e %Y", "%b %e %y", "%d-%b", "%m/%d/%y", "%m/%d/%Y", "%d/%m/%y", "%d/%m/%Y"],
+
+        getArrayType: function getType(arr) {
+            var res = null;
+
+            dateFormats.forEach(f => {
+                var parseDate = d3.timeParse(f);
+                var parsedValues = arr.map(str => { parseDate(str) });
+
+                if (parsedValues.indexOf(null) >= 0) {
+                    res = { type: "time", format: f };;
+                }
+            })
+            if (res == null) {
+                var isVal = true;
+                arr.forEach(d => {
+                    if (isNaN(parseFloat(d)))
+                        isVal = false;
+                })
+                if (isVal)
+                    res == "value";
+            }
+            if (res == null) {
+                res = "category";
+
+            }
+            return res;
         }
+
     }
 }
